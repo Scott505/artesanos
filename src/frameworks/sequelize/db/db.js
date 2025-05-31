@@ -1,4 +1,4 @@
-import { sequelize } from '../dbConexion.js';
+import { sequelize } from './dbConexion.js';
 
 export const initDb = async () => {
   try {

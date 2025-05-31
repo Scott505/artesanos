@@ -1,6 +1,6 @@
 import express from 'express';
-import { appConfig } from './frameworks/index.js';
-import { initDb } from './frameworks/db.js';
+import { appConfig } from './src/frameworks/express/index.js';
+import { initDb } from './src/frameworks/sequelize/db/db.js';
 
 const app = express();
 appConfig(app);

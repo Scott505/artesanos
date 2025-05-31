@@ -1,5 +1,7 @@
 import { DataTypes } from 'sequelize';
-import { sequelize } from '../dbConexion.js';
+import { sequelize } from '../db/dbConexion.js';
+
+//Modelo Sequelize para la entidad Persona
 
 export const Personas = sequelize.define('Personas', {
     id_persona: {
