@@ -1,6 +1,7 @@
 import { PersonaRepository } from '../repositories/PersonaRepository.js';
 import { getPersonaById } from '../../usecase/persona/getPersonasById.js';
 import { getAllPersonas } from '../../usecase/persona/getAllPersonas.js';
+import { createPersona } from '../../usecase/persona/createPersona.js';
 
 const personaRepository = new PersonaRepository();
 
@@ -37,3 +38,14 @@ export const getAllPersonasController = async (req, res) => {
 };
 
 
+export const createPersonaController = async (req, res) => {
+  try {
+    console.log('Datos recibidos para crear persona:', req.body);
+    const nuevaPersona = await createPersona(req.body, personaRepository);
+    res.status(201).send("Persona creada exitosamente");
+    console.log('Persona creada:', nuevaPersona);
+  } catch (error) {
+    console.error('Error al crear persona:', error);
+    res.status(500).json({ error: 'Error del servidor al crear persona' });
+  }
+};

@@ -1,7 +1,7 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { getPersonaByIdController, getAllPersonasController } from '../../../adapters/controllers/PersonaController.js';
+import { getPersonaByIdController, getAllPersonasController, createPersonaController } from '../../../adapters/controllers/PersonaController.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -17,7 +17,8 @@ perfilRouter.get('/', (req, res) => {
 
 // Ruta para obtener una persona por ID utilizando el controlador
 
-perfilRouter.get('/todaslaspersonas', getAllPersonasController)
+perfilRouter.get('/todaslaspersonas', getAllPersonasController);
 
 perfilRouter.get('/id/:id', getPersonaByIdController);
 
+perfilRouter.post('/registrar', createPersonaController);

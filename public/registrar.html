@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Persona</title>
+</head>
+
+<body>
+    <h1>Registrar Persona</h1>
+    <form action="/perfil/registrar" method="POST">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required><br><br>
+
+        <label for="mail">Correo electrónico:</label>
+        <input type="email" id="mail" name="mail" required><br><br>
+
+        <label for="telefono">Teléfono:</label>
+        <input type="number" id="telefono" name="telefono"><br><br>
+
+        <label for="intereses">Intereses:</label>
+        <input type="text" id="intereses" name="intereses" required><br><br>
+
+        <label for="info">Información adicional:</label><br>
+        <textarea id="info" name="info" required></textarea><br><br>
+
+        <button type="submit">Registrar</button>
+    </form>
+</body>
+
+</html>

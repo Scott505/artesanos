@@ -10,4 +10,9 @@ export class PersonaRepository {
   async getAllPersonas() {
     return await Personas.findAll();
   }
-}
+
+  async create(personaData) {
+    return await Personas.create(personaData);
+  };
+};
+
