@@ -1,12 +1,11 @@
 import { PerfilRepository } from '../repositories/PerfilRepository.js';
-import { getPerfilById } from '../../usecase/persona/getPerfilById.js';
-import { getAllPerfiles } from '../../usecase/persona/getAllPerfiles.js';
-import { createPerfil } from '../../usecase/persona/createPerfil.js';
-
-const perfilRepository = new PerfilRepository();
+import { getPerfilById } from '../../usecase/perfil/getPerfilById.js';
+import { getAllPerfiles } from '../../usecase/perfil/getAllPerfiles.js';
+import { createPerfil } from '../../usecase/perfil/createPerfil.js';
 
 // Controlador para manejar la solicitud de obtener una persona por ID
 export const getPerfilByIdController = async (req, res) => {
+  const perfilRepository = new PerfilRepository();
   try {
     const id = req.params.id; //Toma el ID de los parámetros de la solicitud
     const perfil = await getPerfilById(id, perfilRepository); // Llama a la función usecase pasando el ID y el repositorio
@@ -28,6 +27,7 @@ export const getPerfilByIdController = async (req, res) => {
 
 
 export const getAllPerfilesController = async (req, res) => {
+  const perfilRepository = new PerfilRepository();
   try {
     const perfiles = await getAllPerfiles(perfilRepository);
     res.json(perfiles);
@@ -39,6 +39,7 @@ export const getAllPerfilesController = async (req, res) => {
 
 
 export const createPerfilController = async (req, res) => {
+  const perfilRepository = new PerfilRepository();
   try {
     console.log('Datos recibidos para crear Perfil:', req.body);
     const nuevoPerfil = await createPerfil(req.body, perfilRepository);

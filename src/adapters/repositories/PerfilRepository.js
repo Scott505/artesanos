@@ -1,18 +1,21 @@
-import {Perfiles} from '../../frameworks/sequelize/models/Perfiles.js';
-
-//Repositorio con Sequelize para manejar las operaciones de la entidad Persona
+import { getModels } from "../../frameworks/sequelize/db/db.js";
 
 export class PerfilRepository {
+constructor() {
+    const models = getModels();
+    this.perfilesModel = models.perfiles;
+  }
+
   async getPerfilById(id) {
-    return await Perfiles.findByPk(id);
+    return await this.perfilesModel.findByPk(id);
   }
 
   async getAllPerfiles() {
-    return await Perfiles.findAll();
+    return await this.perfilesModel.findAll();
   }
 
   async create(PerfilData) {
-    return await Perfiles.create(PerfilData);
+    return await this.perfilesModel.create(PerfilData);
   };
 };
 

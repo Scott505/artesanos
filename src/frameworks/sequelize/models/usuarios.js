@@ -1,45 +1,30 @@
 import _sequelize from 'sequelize';
 const { Model, Sequelize } = _sequelize;
 
-export default class perfiles extends Model {
+export default class usuarios extends Model {
   static init(sequelize, DataTypes) {
   return super.init({
-    id_perfil: {
+    id_usuario: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    id_usuario: {
-      type: DataTypes.INTEGER,
+    username: {
+      type: DataTypes.STRING(255),
       allowNull: true,
-      references: {
-        model: 'usuarios',
-        key: 'id_usuario'
-      }
+      unique: "username"
     },
-    foto: {
+    'contraseña_hash': {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    nombre: {
-      type: DataTypes.STRING(255),
-      allowNull: true
-    },
-    telefono: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
-    mail: {
-      type: DataTypes.STRING(255),
-      allowNull: true
-    },
-    experiencia: {
-      type: DataTypes.STRING(255),
+    rol: {
+      type: DataTypes.STRING(50),
       allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'perfiles',
+    tableName: 'usuarios',
     timestamps: false,
     indexes: [
       {
@@ -47,14 +32,15 @@ export default class perfiles extends Model {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "id_perfil" },
+          { name: "id_usuario" },
         ]
       },
       {
-        name: "id_usuario",
+        name: "username",
+        unique: true,
         using: "BTREE",
         fields: [
-          { name: "id_usuario" },
+          { name: "username" },
         ]
       },
     ]
