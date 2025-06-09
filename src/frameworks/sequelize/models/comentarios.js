@@ -48,14 +48,14 @@ export default class comentarios extends Model {
         ]
       },
       {
-        name: "id_perfil",
+        name: "comentarios_ibfk_1",
         using: "BTREE",
         fields: [
           { name: "id_perfil" },
         ]
       },
       {
-        name: "id_publicacion",
+        name: "comentarios_ibfk_2",
         using: "BTREE",
         fields: [
           { name: "id_publicacion" },

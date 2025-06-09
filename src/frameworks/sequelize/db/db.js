@@ -21,3 +21,6 @@ export const getModels = () => {
   return models;
 };
 
+export const getSequelize = () => {
+  return sequelize;
+};

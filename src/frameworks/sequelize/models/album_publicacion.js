@@ -37,7 +37,7 @@ export default class album_publicacion extends Model {
         ]
       },
       {
-        name: "id_publicacion",
+        name: "album_publicacion_ibfk_2",
         using: "BTREE",
         fields: [
           { name: "id_publicacion" },

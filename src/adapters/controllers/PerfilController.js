@@ -1,7 +1,10 @@
+import { getSequelize } from "../../frameworks/sequelize/db/db.js";
 import { PerfilRepository } from '../repositories/PerfilRepository.js';
 import { getPerfilById } from '../../usecase/perfil/getPerfilById.js';
 import { getAllPerfiles } from '../../usecase/perfil/getAllPerfiles.js';
-import { createPerfil } from '../../usecase/perfil/createPerfil.js';
+import { crearUsuarioConPerfil } from '../../usecase/perfil/crearUsuarioConPerfil.js';
+import { UsuarioRepository } from '../repositories/UsuarioRepository.js';
+
 
 // Controlador para manejar la solicitud de obtener una persona por ID
 export const getPerfilByIdController = async (req, res) => {
@@ -38,15 +41,31 @@ export const getAllPerfilesController = async (req, res) => {
 };
 
 
-export const createPerfilController = async (req, res) => {
-  const perfilRepository = new PerfilRepository();
+export const crearUsuarioController = async (req, res) => {
+  const sequelize = getSequelize();
+  const transaction = await sequelize.transaction();
+
+  const usuarioRepo = new UsuarioRepository();
+  const perfilRepo = new PerfilRepository();
+
+  const { nombre, mail, contraseña, foto, telefono, experiencia } = req.body;
+
   try {
-    console.log('Datos recibidos para crear Perfil:', req.body);
-    const nuevoPerfil = await createPerfil(req.body, perfilRepository);
-    res.status(201).send("Perfil creado exitosamente");
-    console.log('Perfil creado:', nuevoPerfil);
+    // Llamada al usecase con los datos
+    const nuevoUsuario = await crearUsuarioConPerfil({
+      usuarioRepo,
+      perfilRepo,
+      usuarioData: { mail, contraseña },
+      perfilData: { nombre, mail, telefono, foto, experiencia },
+      transaction
+    });
+
+    await transaction.commit();
+    res.status(201).json(nuevoUsuario); 
+
   } catch (error) {
-    console.error('Error al crear Perfil:', error);
-    res.status(500).json({ error: 'Error del servidor al crear Perfil' });
+     console.error(error); 
+    await transaction.rollback();
+    res.status(500).json({ error: error.message });
   }
 };

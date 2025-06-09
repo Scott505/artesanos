@@ -14,8 +14,8 @@ constructor() {
     return await this.perfilesModel.findAll();
   }
 
-  async create(PerfilData) {
-    return await this.perfilesModel.create(PerfilData);
+  async create(PerfilData, transaction) {
+    return await this.perfilesModel.create(PerfilData, { transaction });
   };
 };
 

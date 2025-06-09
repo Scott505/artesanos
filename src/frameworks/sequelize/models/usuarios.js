@@ -5,6 +5,7 @@ export default class usuarios extends Model {
   static init(sequelize, DataTypes) {
   return super.init({
     id_usuario: {
+      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
@@ -20,7 +21,13 @@ export default class usuarios extends Model {
     },
     rol: {
       type: DataTypes.STRING(50),
-      allowNull: true
+      allowNull: true,
+      defaultValue: "usuario"
+    },
+    activo: {
+      type: DataTypes.TINYINT,
+      allowNull: false,
+      defaultValue: 1
     }
   }, {
     sequelize,

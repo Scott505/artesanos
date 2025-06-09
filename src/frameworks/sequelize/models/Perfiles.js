@@ -5,6 +5,7 @@ export default class perfiles extends Model {
   static init(sequelize, DataTypes) {
   return super.init({
     id_perfil: {
+      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
@@ -51,7 +52,7 @@ export default class perfiles extends Model {
         ]
       },
       {
-        name: "id_usuario",
+        name: "perfiles_ibfk_1",
         using: "BTREE",
         fields: [
           { name: "id_usuario" },

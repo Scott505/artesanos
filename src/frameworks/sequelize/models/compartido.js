@@ -41,7 +41,7 @@ export default class compartido extends Model {
         ]
       },
       {
-        name: "id_publicacion",
+        name: "compartido_ibfk_1",
         using: "BTREE",
         fields: [
           { name: "id_publicacion" },

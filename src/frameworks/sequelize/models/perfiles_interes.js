@@ -37,7 +37,7 @@ export default class perfiles_interes extends Model {
         ]
       },
       {
-        name: "id_perfil",
+        name: "perfiles_interes_ibfk_2",
         using: "BTREE",
         fields: [
           { name: "id_perfil" },

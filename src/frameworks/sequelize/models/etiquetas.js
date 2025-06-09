@@ -37,7 +37,7 @@ export default class etiquetas extends Model {
         ]
       },
       {
-        name: "id_publicacion",
+        name: "etiquetas_ibfk_1",
         using: "BTREE",
         fields: [
           { name: "id_publicacion" },

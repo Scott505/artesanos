@@ -35,7 +35,7 @@ export default class albumnes extends Model {
         ]
       },
       {
-        name: "id_perfil",
+        name: "albumnes_ibfk_1",
         using: "BTREE",
         fields: [
           { name: "id_perfil" },

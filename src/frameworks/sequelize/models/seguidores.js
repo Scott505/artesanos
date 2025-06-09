@@ -41,7 +41,7 @@ export default class seguidores extends Model {
         ]
       },
       {
-        name: "id_seguidor",
+        name: "seguidores_ibfk_2",
         using: "BTREE",
         fields: [
           { name: "id_seguidor" },

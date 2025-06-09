@@ -1,0 +1,17 @@
+extends layout
+
+block head
+  meta(name="viewport" content="width=device-width, initial-scale=1.0")
+  link(rel="stylesheet", href="estilos.css")
+
+block contenido
+  h1 Bienvenido a mi app
+
+  form.login-box(action="/login", method="POST")
+    input(type="email", name="mail", placeholder="Correo electrónico", required)
+    input(type="password", name="contraseña", placeholder="Contraseña", required)
+    button(type="submit") Iniciar sesión
+    .register-link
+      p
+        | ¿No tenés usuario? 
+        a(href="/registrarse") ¡Crealo!
