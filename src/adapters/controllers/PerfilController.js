@@ -4,7 +4,8 @@ import { getPerfilById } from '../../usecase/perfil/getPerfilById.js';
 import { getAllPerfiles } from '../../usecase/perfil/getAllPerfiles.js';
 import { crearUsuarioConPerfil } from '../../usecase/perfil/crearUsuarioConPerfil.js';
 import { UsuarioRepository } from '../repositories/UsuarioRepository.js';
-
+import { manejadorDeTransacciones } from "../../usecase/manejadorDeTransacciones.js";
+import * as hashService from "../../frameworks/bcrypt/hash.js";
 
 // Controlador para manejar la solicitud de obtener una persona por ID
 export const getPerfilByIdController = async (req, res) => {
@@ -43,29 +44,33 @@ export const getAllPerfilesController = async (req, res) => {
 
 export const crearUsuarioController = async (req, res) => {
   const sequelize = getSequelize();
-  const transaction = await sequelize.transaction();
-
   const usuarioRepo = new UsuarioRepository();
   const perfilRepo = new PerfilRepository();
 
   const { nombre, mail, contraseña, foto, telefono, experiencia } = req.body;
+  //Verifica campos
+  if (!mail || !contraseña) {
+    return res.status(400).json({ error: "Mail y contraseña son obligatorios." });
+  }
 
   try {
-    // Llamada al usecase con los datos
-    const nuevoUsuario = await crearUsuarioConPerfil({
-      usuarioRepo,
-      perfilRepo,
-      usuarioData: { mail, contraseña },
-      perfilData: { nombre, mail, telefono, foto, experiencia },
-      transaction
-    });
+    const nuevoUsuario = await manejadorDeTransacciones.withTransaction(
+      sequelize,
+      async (transaction) => {
+        return await crearUsuarioConPerfil({
+          usuarioRepository: usuarioRepo,
+          perfilRepository: perfilRepo,
+          usuarioData: { username: mail, contraseña },
+          perfilData: { nombre, mail, telefono, foto, experiencia },
+          transaction,
+          hashService,
+        });
+      }
+    );
 
-    await transaction.commit();
-    res.status(201).json(nuevoUsuario); 
-
+    res.status(201).json(nuevoUsuario);
   } catch (error) {
-     console.error(error); 
-    await transaction.rollback();
+    console.error(error);
     res.status(500).json({ error: error.message });
   }
 };

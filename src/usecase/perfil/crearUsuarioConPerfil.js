@@ -1,20 +1,25 @@
-//Funcion para traer todas las personas
+export const crearUsuarioConPerfil = async ({
+  usuarioData,
+  perfilData,
+  usuarioRepository,
+  perfilRepository,
+  transaction,
+  hashService,
+}) => {
+    // Hash de contraseña
+    const hashedPassword = await hashService.hash(usuarioData.contraseña);
+    const usuarioDataConHash = {
+      ...usuarioData,
+      contraseña_hash: hashedPassword,
+    };
 
-export const crearUsuarioConPerfil = async ({ usuarioRepo, perfilRepo, usuarioData, perfilData, transaction }) => {
+    delete usuarioDataConHash.contraseña;
 
-  const usuario = await usuarioRepo.create({
-    username: usuarioData.mail,
-    contraseña_hash: usuarioData.contraseña,
-    rol: 'usuario'
-  }, transaction);
-/*
-  console.log('Usuario creado:', usuario);
-  console.log('id_usuario:', usuario.id_usuario);*/
+    // Crear usuario y perfil dentro de una transacción
+    const usuario = await usuarioRepository.create(usuarioDataConHash, { transaction });
+    perfilData.id_usuario = usuario.id_usuario;
+    const perfil = await perfilRepository.create(perfilData, { transaction });
 
-  await perfilRepo.create({
-      ...perfilData, 
-      id_usuario: usuario.id_usuario 
-    }, transaction);
-
-  return usuario;
+    return { usuario, perfil };
+  ;
 };
