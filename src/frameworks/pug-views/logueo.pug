@@ -8,7 +8,7 @@ block head
 block contenido
   h1 Bienvenido a mi app
 
-  form.login-box(action="/login" method="POST")
+  form.login-box(action="/usuario/ingresar" method="POST")
     input(type="email" name="mail" placeholder="Correo electrónico", required)
     input(type="password" name="contraseña" placeholder="Contraseña", required)
     button(type="submit") Iniciar sesión

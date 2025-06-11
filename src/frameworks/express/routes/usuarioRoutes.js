@@ -1,7 +1,7 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { crearUsuarioController} from '../../../adapters/controllers/PerfilController.js';
+import { crearUsuarioController, ingresarUsuarioController} from '../../../adapters/controllers/PerfilController.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,5 +16,7 @@ usuarioRouter.get('/registrarse', (req, res) => {
 usuarioRouter.get('/loguearse', (req, res) => {
   res.render('logueo', { titulo: 'Iniciar sesión' });
 });
+
+usuarioRouter.post('/ingresar', ingresarUsuarioController);
 
 usuarioRouter.post('/registrar', crearUsuarioController);

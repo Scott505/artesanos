@@ -6,16 +6,20 @@ import { crearUsuarioConPerfil } from '../../usecase/perfil/crearUsuarioConPerfi
 import { UsuarioRepository } from '../repositories/UsuarioRepository.js';
 import { manejadorDeTransacciones } from "../../usecase/manejadorDeTransacciones.js";
 import * as hashService from "../../frameworks/bcrypt/hash.js";
+import { ingresar } from '../../usecase/perfil/ingresar.js';
 
 // Controlador para manejar la solicitud de obtener una persona por ID
 export const getPerfilByIdController = async (req, res) => {
   const perfilRepository = new PerfilRepository();
   try {
-    const id = req.params.id; //Toma el ID de los parámetros de la solicitud
-    const perfil = await getPerfilById(id, perfilRepository); // Llama a la función usecase pasando el ID y el repositorio
+    //Busca la elperfil por el id
+    const id = req.params.id; 
+    const perfil = await getPerfilById(id, perfilRepository); 
+
     if (!perfil) {
       return res.status(404).json({ error: 'Persona no encontrada' });
     }
+
     res.json(perfil); // Devuelve la persona encontrada en formato JSON
   }
 
@@ -29,7 +33,6 @@ export const getPerfilByIdController = async (req, res) => {
   }
 };
 
-
 export const getAllPerfilesController = async (req, res) => {
   const perfilRepository = new PerfilRepository();
   try {
@@ -40,7 +43,6 @@ export const getAllPerfilesController = async (req, res) => {
     res.status(500).json({ error: 'Error del servidor' });
   }
 };
-
 
 export const crearUsuarioController = async (req, res) => {
   const sequelize = getSequelize();
@@ -72,5 +74,31 @@ export const crearUsuarioController = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error.message });
+  }
+};
+
+export const ingresarUsuarioController = async (req, res) => {
+  const { mail, contraseña } = req.body;
+  const usuarioRepo = new UsuarioRepository();
+
+  if (!mail || !contraseña) {
+    return res.status(400).json({ error: "Mail y contraseña obligatorios." });
+  }
+
+  try {
+    const usuario = await ingresar({
+      mail,
+      contraseña,
+      usuarioRepo,
+      hashService,
+    });
+
+    req.session.user = usuario;
+
+    res.redirect('/perfil/id/' + usuario.id);
+
+  } catch (error) {
+    console.error(error);
+    res.status(401).render('logueo', { error: error.message });;
   }
 };
