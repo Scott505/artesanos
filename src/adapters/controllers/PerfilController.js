@@ -80,6 +80,7 @@ export const crearUsuarioController = async (req, res) => {
 export const ingresarUsuarioController = async (req, res) => {
   const { mail, contraseña } = req.body;
   const usuarioRepo = new UsuarioRepository();
+  const perfilRepo = new PerfilRepository();
 
   if (!mail || !contraseña) {
     return res.status(400).json({ error: "Mail y contraseña obligatorios." });
@@ -93,9 +94,21 @@ export const ingresarUsuarioController = async (req, res) => {
       hashService,
     });
 
-    req.session.user = usuario;
+    const perfil = await perfilRepo.findByUsuarioId(usuario.id_usuario);
+    if (!perfil) {
+      throw new Error("No se encontró el perfil del usuario.");
+    }
 
-    res.redirect('/perfil/id/' + usuario.id);
+    req.session.user = {
+      id_usuario: usuario.id_usuario,
+      rol: usuario.rol,
+      username: usuario.username,
+      id_perfil: perfil.id_perfil
+    };
+
+    //console.log("Usuario logueado:", req.session.user);
+
+    res.redirect('/perfil/id/' + perfil.id_perfil);
 
   } catch (error) {
     console.error(error);

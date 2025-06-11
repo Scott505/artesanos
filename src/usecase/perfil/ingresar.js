@@ -9,11 +9,11 @@ export const ingresar = async ({
     const passwordValida = await hashService.compare(contraseña, usuario.contraseña_hash);
     if (!passwordValida) throw new Error("Datos incorrectos");
 
-    console.log("Usuario ingresado:", usuario);
-    
+    //console.log("Usuario ingresado:", usuario);
+
     return {
-        id: usuario.id_usuario,
-        nombre: usuario.nombre,
-        mail: usuario.mail
+        id_usuario: usuario.id_usuario,
+        username: usuario.username,
+        rol: usuario.rol
     };
 };
