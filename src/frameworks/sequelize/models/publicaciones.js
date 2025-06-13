@@ -21,6 +21,10 @@ export default class publicaciones extends Model {
     descripcion: {
       type: DataTypes.STRING(255),
       allowNull: true
+    },
+    imagen: {
+      type: DataTypes.STRING(255),
+      allowNull: false
     }
   }, {
     sequelize,

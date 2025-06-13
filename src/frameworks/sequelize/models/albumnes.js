@@ -5,6 +5,7 @@ export default class albumnes extends Model {
   static init(sequelize, DataTypes) {
   return super.init({
     id_album: {
+      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true

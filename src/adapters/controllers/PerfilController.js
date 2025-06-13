@@ -108,7 +108,7 @@ export const ingresarUsuarioController = async (req, res) => {
 
     //console.log("Usuario logueado:", req.session.user);
 
-    res.redirect('/perfil/id/' + perfil.id_perfil);
+    res.redirect('/publicar');
 
   } catch (error) {
     console.error(error);

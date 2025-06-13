@@ -1,5 +1,6 @@
 import { perfilRouter } from '../express/routes/perfilRoutes.js';
 import { usuarioRouter } from '../express/routes/usuarioRoutes.js';
+import { publicacionesRouter } from './routes/publicacionesRoutes.js';
 import express from 'express';
 import session from 'express-session';
 import path from 'path';
@@ -27,6 +28,7 @@ export const appConfig = (app) => {
   app.set('views', path.join(__dirname, '../pug-views'));
 
   //Rutas
+  app.use('/publicar', publicacionesRouter)
   app.use('/perfil',estaLogueado, perfilRouter);
   app.use('/usuario', usuarioRouter);
 

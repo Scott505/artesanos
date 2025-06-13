@@ -5,6 +5,7 @@ export default class comentarios extends Model {
   static init(sequelize, DataTypes) {
   return super.init({
     id_comentario: {
+      autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
