@@ -33,7 +33,7 @@ export const renderPublicarConAlbumnes = async (req, res, next) => {
     console.log('ID de perfil:', id_perfil);
     console.log('Álbumes obtenidos para publicar:', albumnes);
 
-    res.render('publicar', { title: 'Publicaciones', albumnes });
+    res.render('publicar', { titulo: 'Publicaciones', albumnes });
   } catch (error) {
     console.error('Error al obtener álbumes para publicar:', error);
     next(error);

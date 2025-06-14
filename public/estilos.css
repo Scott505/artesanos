@@ -63,3 +63,56 @@ h1 {
 .register-link a:hover {
   text-decoration: underline;
 }
+
+.form-publicar {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+  width: 90%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-publicar .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-publicar label {
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-publicar input,
+.form-publicar select {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.form-publicar select:disabled {
+  background-color: #e9ecef;
+  color: #6c757d;
+}
+
+.form-publicar button {
+  padding: 12px;
+  font-size: 1rem;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-publicar button:hover {
+  background-color: #218838;
+}
