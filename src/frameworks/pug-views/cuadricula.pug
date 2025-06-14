@@ -1,0 +1,14 @@
+extends layout
+
+block contenido
+  h1= titulo
+
+  .grid-container
+    each item in items
+      a.card(href=`${tipo}/${item.id}`)
+        if tipo === 'album'
+          .card-icon
+            i.fas.fa-folder
+          h3.card-title= item.nombre
+        else if tipo === 'publicacion'
+          img.card-image(src=item.imagen_url, alt="Publicación")

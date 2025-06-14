@@ -4,6 +4,9 @@ import { AlbumRepository } from '../repositories/AlbumRepository.js';
 import { AlbumPublicacionRepository } from '../repositories/AlbumPublicacionRepository.js';
 import { manejadorDeTransacciones } from '../../usecase/manejadorDeTransacciones.js';
 import { getSequelize } from '../../frameworks/sequelize/db/db.js';
+import { getPublicacionConComentarios } from '../../usecase/publicaciones/getPublicacionConComentarios.js';
+import { ComentariosRepository } from '../repositories/ComentariosRepository.js';
+import { PerfilRepository } from '../repositories/PerfilRepository.js';
 
 export const crearPublicacionController = async (req, res) => {
     const sequelize = getSequelize();
@@ -61,4 +64,36 @@ export const crearPublicacionController = async (req, res) => {
         console.error('Error al crear publicación:', error);
         res.status(500).send('Error al crear la publicación');
     }
+};
+
+
+export const mostrarPublicacionesController = async (req, res) => {
+  const id_publicacion = req.params.id;
+
+  const publicacionesRepo = new PublicacionesRepository();
+  const comentariosRepo = new ComentariosRepository();
+  const perfilesRepo = new PerfilRepository();
+
+  try {
+    const publicacion = await getPublicacionConComentarios({
+      id_publicacion,
+      publicacionesRepository: publicacionesRepo,
+      comentariosRepository: comentariosRepo,
+      perfilesRepository: perfilesRepo
+    });
+
+    if (!publicacion) {
+      return res.status(404).send('Publicación no encontrada');
+    }
+
+    res.render('verPublicacion', {
+      titulo: `Publicación #${id_publicacion}`,
+      publicaciones: [publicacion]
+    });
+
+  } catch (error) {
+    
+    console.error('Error al obtener publicación:', error);
+    res.status(500).send('Error interno');
+  }
 };

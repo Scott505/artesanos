@@ -6,8 +6,8 @@ export class UsuarioRepository {
     this.usuariosModel = models.usuarios;
   }
 
-  async getUsuarioById(id, options  = {}) {
-    return await this.usuariosModel.findByPk(id, options );
+  async getUsuarioById(id, options = {}) {
+    return await this.usuariosModel.findByPk(id, options);
   }
 
   async getAllUsuarios(options = {}) {
@@ -15,14 +15,14 @@ export class UsuarioRepository {
   }
 
   async create(usuarioData, options = {}) {
-    return await this.usuariosModel.create(usuarioData, options );
+    return await this.usuariosModel.create(usuarioData, options);
   }
- 
+
   async findByUsername(username, options = {}) {
-  return await this.usuariosModel.findOne({
-    where: { username },
-    ...options
-  });
-}
+    return await this.usuariosModel.findOne({
+      where: { username },
+      ...options
+    });
+  }
 
 }

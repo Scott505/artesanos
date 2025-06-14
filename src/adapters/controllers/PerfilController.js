@@ -108,7 +108,7 @@ export const ingresarUsuarioController = async (req, res) => {
 
     //console.log("Usuario logueado:", req.session.user);
 
-    res.redirect('/publicar');
+    res.redirect('/mostrar/albumnes'); 
 
   } catch (error) {
     console.error(error);

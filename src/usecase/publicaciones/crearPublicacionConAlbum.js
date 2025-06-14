@@ -34,13 +34,13 @@ export const crearPublicacionConAlbum = async ({
     );
   }
    
-  console.log('Publicación creada:', {
+  /*console.log('Publicación creada:', {
     id_publicacion: publicacion.id_publicacion,
     descripcion,
     imagen,
     id_perfil,
     id_album: id_album_final,
-  });
+  });*/
   
   return publicacion;
 };
