@@ -7,7 +7,7 @@ export const crearUsuarioConPerfil = async ({
   hashService,
 }) => {
     // Hash de contraseña
-    const hashedPassword = await hashService.hash(usuarioData.contraseña);
+    const hashedPassword = await hashService.hash(usuarioData.contrasena);
     const usuarioDataConHash = {
       ...usuarioData,
       contraseña_hash: hashedPassword,

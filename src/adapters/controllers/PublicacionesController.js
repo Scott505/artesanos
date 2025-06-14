@@ -22,12 +22,7 @@ export const crearPublicacionController = async (req, res) => {
         return res.status(400).send('Faltan datos obligatorios');
     }
 
-    /*console.log('Datos de la publicación:', {
-        descripcion,
-        id_perfil,
-        imagen,
-        id_album,
-        titulo_nuevo_album,
+    /*console.log('Datos de la publicación:', {        descripcion,        id_perfil,        imagen,        id_album,        titulo_nuevo_album,
     });*/
 
     try {
@@ -57,8 +52,6 @@ export const crearPublicacionController = async (req, res) => {
                 titulo_nuevo_album
             }
         });
-
-
 
     } catch (error) {
         console.error('Error al crear publicación:', error);

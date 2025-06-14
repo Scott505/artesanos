@@ -1,10 +1,7 @@
 import express from 'express';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { crearUsuarioController, ingresarUsuarioController} from '../../../adapters/controllers/PerfilController.js';
+import { crearUsuarioController, ingresarUsuarioController } from '../../../adapters/controllers/PerfilController.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import { upload } from '../../../middlewares/upload.js';
 
 export const usuarioRouter = express.Router();
 // Ruta para obtener una persona por ID utilizando el controlador
@@ -19,4 +16,4 @@ usuarioRouter.get('/loguearse', (req, res) => {
 
 usuarioRouter.post('/ingresar', ingresarUsuarioController);
 
-usuarioRouter.post('/registrar', crearUsuarioController);
+usuarioRouter.post('/registrar', upload.single('foto'), crearUsuarioController);

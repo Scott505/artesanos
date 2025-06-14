@@ -1,25 +1,25 @@
 extends layout
 
 block contenido
-  h1 Registrar Persona
+  .ancho-maximo-centrado
+    h1 Registrar Persona
+    form.login-box(action="/usuario/registrar", method="POST", enctype="multipart/form-data")
+      label(for="foto") Foto:
+      input(type="file", id="foto", name="foto", accept="image/*", required)
 
-  form.login-box(action="/usuario/registrar", method="POST")
-    label(for="foto") Foto:
-    input(type="text", id="foto", name="foto", required)
+      label(for="nombre") Nombre:
+      input(type="text", id="nombre", name="nombre", required)
 
-    label(for="nombre") Nombre:
-    input(type="text", id="nombre", name="nombre", required)
+      label(for="mail") Correo electrónico:
+      input(type="email", id="mail", name="mail", required)
 
-    label(for="mail") Correo electrónico:
-    input(type="email", id="mail", name="mail", required)
+      label(for="telefono") Teléfono:
+      input(type="number", id="telefono", name="telefono")
 
-    label(for="telefono") Teléfono:
-    input(type="number", id="telefono", name="telefono")
+      label(for="experiencia") Experiencia:
+      input(type="text", id="experiencia", name="experiencia", required)
 
-    label(for="experiencia") Experiencia:
-    input(type="text", id="experiencia", name="experiencia", required)
+      label(for="contrasena") Contraseña:
+      input(type="password", id="contrasena", name="contrasena", required)
 
-    label(for="contraseña") Contraseña:
-    input(type="password", id="contraseña", name="contraseña", required)
-
-    button(type="submit") Registrar
+      button(type="submit") Registrar

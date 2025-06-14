@@ -20,7 +20,14 @@ export const getPerfilByIdController = async (req, res) => {
       return res.status(404).json({ error: 'Persona no encontrada' });
     }
 
-    res.render('perfil', { perfil, titulo: `Perfil de ${perfil.nombre}` });
+    const mensajeExito = req.session.mensajeExito;
+    delete req.session.mensajeExito;
+
+    res.render('perfil', {
+      perfil,
+      titulo: `Perfil de ${perfil.nombre}`,
+      mensajeExito
+    });
   }
 
   catch (error) {
@@ -49,9 +56,13 @@ export const crearUsuarioController = async (req, res) => {
   const usuarioRepo = new UsuarioRepository();
   const perfilRepo = new PerfilRepository();
 
-  const { nombre, mail, contraseña, foto, telefono, experiencia } = req.body;
+  const { nombre, mail, contrasena, telefono, experiencia } = req.body;
+  const foto = req.file?.filename;
+  //console.log("Foto subida:", foto);
+  //console.log("Datos recibidos:", req.body);
+
   //Verifica campos
-  if (!mail || !contraseña) {
+  if (!mail || !contrasena) {
     return res.status(400).json({ error: "Mail y contraseña son obligatorios." });
   }
 
@@ -62,7 +73,7 @@ export const crearUsuarioController = async (req, res) => {
         return await crearUsuarioConPerfil({
           usuarioRepository: usuarioRepo,
           perfilRepository: perfilRepo,
-          usuarioData: { username: mail, contraseña },
+          usuarioData: { username: mail, contrasena },
           perfilData: { nombre, mail, telefono, foto, experiencia },
           transaction,
           hashService,
@@ -70,7 +81,22 @@ export const crearUsuarioController = async (req, res) => {
       }
     );
 
-    res.status(201).json(nuevoUsuario);
+    req.session.user = {
+      id_usuario: nuevoUsuario.id_usuario,
+      id_perfil: nuevoUsuario.perfil.id_perfil,
+      rol: 'usuario',
+      username: nuevoUsuario.username,
+      foto: nuevoUsuario.perfil.foto,
+      nombre: nuevoUsuario.perfil.nombre
+    };
+
+    req.session.mensajeExito = "Usuario registrado exitosamente.";
+    res.redirect(`/perfil/id/${nuevoUsuario.perfil.id_perfil}`);
+
+
+
+
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error.message });
