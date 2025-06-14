@@ -10,11 +10,6 @@ export const perfilRouter = express.Router();
 
 // Ruta principal de perfil
 
-perfilRouter.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../../../public/perfil.html'));
-});
-
-
 // Ruta para obtener una persona por ID utilizando el controlador
 
 perfilRouter.get('/todaslaspersonas', getAllPerfilesController);

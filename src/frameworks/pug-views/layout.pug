@@ -1,11 +1,27 @@
 doctype html
-html()
+html
   head
     meta(charset="UTF-8")
     title Artesanos - #{titulo}
-    link(rel="stylesheet" href="/estilos.css")
+    link(rel="stylesheet", href="/estilos.css")
     block head
-
   body
+    nav.navbar
+      .nav-left
+        a.nav-button(href="/mostrar/albumnes") Inicio
+        a.nav-button(href="/publicar") Publicar
+        a.nav-button(href="/perfil/todaslaspersonas") Personas
+
+      .nav-right
+        if user
+          a.nav-perfil(href=`/perfil/id/${user.id_perfil}`)
+            if user.foto
+              img.nav-foto(src=`/uploads/${user.foto}`, alt="Mi Perfil")
+            else
+              span.nav-perfil-text Mi Perfil
+        else
+          a.nav-button(href="/usuario/loguearse") Iniciar sesión
+          a.nav-button(href="/usuario/registrarse") Registrarse
+
     block contenido
     block foot

@@ -13,14 +13,14 @@ export const getPerfilByIdController = async (req, res) => {
   const perfilRepository = new PerfilRepository();
   try {
     //Busca la elperfil por el id
-    const id = req.params.id; 
-    const perfil = await getPerfilById(id, perfilRepository); 
+    const id = req.params.id;
+    const perfil = await getPerfilById(id, perfilRepository);
 
     if (!perfil) {
       return res.status(404).json({ error: 'Persona no encontrada' });
     }
 
-    res.json(perfil); // Devuelve la persona encontrada en formato JSON
+    res.render('perfil', { perfil, titulo: `Perfil de ${perfil.nombre}` });
   }
 
   catch (error) {
@@ -101,14 +101,17 @@ export const ingresarUsuarioController = async (req, res) => {
 
     req.session.user = {
       id_usuario: usuario.id_usuario,
-      rol: usuario.rol,
-      username: usuario.username,
-      id_perfil: perfil.id_perfil
+      id_perfil: perfil.id_perfil,
+      rol: 'usuario',
+      username: usuario.mail,
+      foto: perfil.foto,
+      nombre: perfil.nombre
     };
+
 
     //console.log("Usuario logueado:", req.session.user);
 
-    res.redirect('/mostrar/albumnes'); 
+    res.redirect('/mostrar/albumnes');
 
   } catch (error) {
     console.error(error);

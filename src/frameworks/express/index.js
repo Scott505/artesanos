@@ -24,13 +24,19 @@ export const appConfig = (app) => {
     saveUninitialized: false
   }));
 
+  app.use((req, res, next) => {
+  //  console.log("MIDDLEWARE GLOBAL - Session user:", req.session.user);
+    res.locals.user = req.session.user || null;
+    next();
+  });
+
   // Configurar Pug
   app.set('view engine', 'pug');
   app.set('views', path.join(__dirname, '../pug-views'));
 
   //Rutas
-  app.use('/mostrar', mostrarRouter);
-  app.use('/publicar',estaLogueado, publicacionesRouter);
+  app.use('/mostrar', estaLogueado, mostrarRouter);
+  app.use('/publicar', estaLogueado, publicacionesRouter);
   app.use('/perfil', estaLogueado, perfilRouter);
   app.use('/usuario', usuarioRouter);
 

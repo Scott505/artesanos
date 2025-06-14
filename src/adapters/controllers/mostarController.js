@@ -40,7 +40,7 @@ export const mostrarPublicacionesDeAlbum = async (req, res) => {
         const id_album = req.params.id;
         const publicaciones = await getPublicacionesByAlbum(id_album, publicacionesRepository);
 
-        console.log('Publicaciones obtenidas para el álbum:', publicaciones);
+        //console.log('Publicaciones obtenidas para el álbum:', publicaciones);
 
         const publicacionesParaVista = publicaciones.map(pub => ({
             id: pub.id_publicacion,

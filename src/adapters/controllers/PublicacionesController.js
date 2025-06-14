@@ -22,13 +22,13 @@ export const crearPublicacionController = async (req, res) => {
         return res.status(400).send('Faltan datos obligatorios');
     }
 
-    console.log('Datos de la publicación:', {
+    /*console.log('Datos de la publicación:', {
         descripcion,
         id_perfil,
         imagen,
         id_album,
         titulo_nuevo_album,
-    });
+    });*/
 
     try {
         await manejadorDeTransacciones.withTransaction(sequelize, async (transaction) => {

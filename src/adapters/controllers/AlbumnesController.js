@@ -30,8 +30,8 @@ export const renderPublicarConAlbumnes = async (req, res, next) => {
     const obtenerAlbumnes = await getAlbumnesByPerfil(id_perfil, albumRepository);
     const albumnes = obtenerAlbumnes.map(a => a.toJSON());
 
-    console.log('ID de perfil:', id_perfil);
-    console.log('Álbumes obtenidos para publicar:', albumnes);
+    //console.log('ID de perfil:', id_perfil);
+    //console.log('Álbumes obtenidos para publicar:', albumnes);
 
     res.render('publicar', { titulo: 'Publicaciones', albumnes });
   } catch (error) {

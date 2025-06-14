@@ -1,0 +1,21 @@
+extends layout
+
+block contenido
+  .perfil-container
+    .perfil-izquierda
+      if perfil.foto
+        img.perfil-foto(src=`/uploads/${perfil.foto}`, alt=`Foto de ${perfil.nombre}`)
+      else
+        div.perfil-sin-foto No hay foto
+      h2.perfil-nombre= perfil.nombre
+
+    .perfil-derecha
+      p
+        strong Teléfono: 
+        | #{perfil.telefono || 'No disponible'}
+      p
+        strong Mail: 
+        | #{perfil.mail || 'No disponible'}
+      p
+        strong Experiencia:
+      p= perfil.experiencia || 'No disponible'

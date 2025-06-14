@@ -1,19 +1,89 @@
 /*                Estilos generales                    */
 
 body {
-  margin: 0 10%;
+  margin: 0;
   font-family: Arial, sans-serif;
   background-color: #f0f2f5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 h1 {
   font-size: 2.5rem;
   margin-bottom: 40px;
   color: #333;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #4A90E2;
+  padding: 0.5rem 2rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.nav-left, .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.nav-button {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.nav-perfil {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  gap: 0.5rem;
+}
+
+.nav-foto {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+  transition: transform 0.3s ease;
+}
+
+.nav-foto:hover {
+  transform: scale(1.1);
+}
+
+.nav-perfil-text {
+  font-size: 1rem;
+}
+
+.ancho-maximo-centrado {
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.ancho-maximo-centrado > * {
+  width: 100%;          /* Para que se adapten a pantallas chicas */
+  max-width: 900px;     /* Ancho máximo para que no se estiren demasiado */
 }
 
 /*          Estilos de registro y de logueo        */
@@ -126,10 +196,13 @@ h1 {
 
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
   gap: 1rem;
   padding: 1rem;
+  max-width: 900px;
+  margin: 0 auto;
 }
+
 
 .card {
   border: 1px solid #ccc;
@@ -162,7 +235,7 @@ h1 {
   border-radius: 10px;
 }
 
-/*            Estilos para mostrar ¿publicacion              */
+/*            Estilos para mostrar publicacion              */
 
 .post {
   border: 1px solid #ccc;
@@ -190,7 +263,6 @@ h1 {
   max-width: 100%;
   border-radius: 6px;
   margin-bottom: 12px;
-  display: block;
 }
 
 .post-comments {
@@ -246,3 +318,78 @@ h1 {
 .comments-list li strong {
   color: #222;
 }
+
+/*            Estilos para mostrar perfil              */
+
+.perfil-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 3rem;
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1.5rem 2rem;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.perfil-izquierda {
+  flex: 0 0 180px;
+  text-align: center;
+}
+
+.perfil-foto {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #4A90E2;
+  box-shadow: 0 4px 8px rgba(74,144,226,0.3);
+  transition: transform 0.3s ease;
+}
+
+.perfil-foto:hover {
+  transform: scale(1.05);
+}
+
+.perfil-sin-foto {
+  width: 160px;
+  height: 160px;
+  background: #d0d0d0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-style: italic;
+  font-size: 0.9rem;
+  user-select: none;
+  border: 2px dashed #999;
+}
+
+.perfil-nombre {
+  margin-top: 1rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #222;
+}
+
+.perfil-derecha {
+  flex: 1;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.perfil-derecha p {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.3rem;
+}
+
+.perfil-derecha strong {
+  color: #4A90E2;
+  font-weight: 600;
+}
+
