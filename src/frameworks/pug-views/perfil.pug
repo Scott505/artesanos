@@ -16,7 +16,8 @@ block contenido
       else
         div.perfil-sin-foto No hay foto
       h2.perfil-nombre= perfil.nombre
-
+      if user && user.id_perfil !== perfil.id_perfil
+        a.btn-ver-album(href=`/mostrar/albumnes/${perfil.id_perfil}?nombre=${encodeURIComponent(perfil.nombre)}`) Ver álbumes de #{perfil.nombre}
     .perfil-derecha
       p
         strong Teléfono: 

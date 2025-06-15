@@ -393,6 +393,20 @@ h1 {
   font-weight: 600;
 }
 
+.btn-ver-album {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  padding: 8px 12px;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+.btn-ver-album:hover {
+  background-color: #0056b3;
+}
+
+
 
 /*            Estilos para mostrar otros perfiles              */
 
@@ -443,6 +457,23 @@ h1 {
 
 .btn-dejar:hover {
   background-color: #b02a37;
+}
+
+.card a:hover .card-image,
+.card a:hover .card-title {
+  transform: scale(1.03);
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.card a .card-image,
+.card a .card-title {
+  transition: transform 0.2s ease-in-out;
+}
+
+.card a:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
 }
 
 

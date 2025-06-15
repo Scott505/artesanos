@@ -6,7 +6,7 @@ block contenido
 
     .grid-container
       each item in items
-        a.card(href=`${tipo}/${item.id}`)
+        a.card(href=`/mostrar/${tipo}/${item.id}`)
           if tipo === 'album'
             .card-icon
               i.fas.fa-folder

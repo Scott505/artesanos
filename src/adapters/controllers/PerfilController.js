@@ -166,7 +166,7 @@ export const ingresarUsuarioController = async (req, res) => {
 
     //console.log("Usuario logueado:", req.session.user);
 
-    res.redirect('/mostrar/albumnes');
+    res.redirect(`/mostrar/albumnes/${req.session.user.id_perfil}`);
 
   } catch (error) {
     console.error(error);

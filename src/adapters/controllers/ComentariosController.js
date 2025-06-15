@@ -20,7 +20,7 @@ export const crearComentarioController = async (req, res) => {
       comentariosRepository: comentariosRepo,
     });
 
-    res.redirect(`/mostrar/album/publicacion/${id_publicacion}`);
+    res.redirect(`/mostrar/publicacion/${id_publicacion}`);
 
 
   } catch (error) {

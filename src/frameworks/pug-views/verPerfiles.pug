@@ -7,17 +7,18 @@ block contenido
     .grid-container
       each perfil in perfiles
         .card
-          if perfil.foto
-            img.card-image(src=`/uploads/${perfil.foto}`, alt="Foto de perfil")
-          else
-            .perfil-sin-foto Sin foto
+          a(href=`/perfil/id/${perfil.id_perfil}`, style="text-decoration: none; color: inherit;")
+            if perfil.foto
+              img.card-image(src=`/uploads/${perfil.foto}`, alt="Foto de perfil")
+            else
+              .perfil-sin-foto Sin foto
 
-          .card-title= perfil.nombre
+            .card-title= perfil.nombre
 
+          // Botones fuera del enlace para evitar navegación al hacer clic
           if perfil.estado_seguimiento === 'no_sigue'
             form(action=`/seguidores/seguir/${perfil.id_perfil}`, method="POST")
               button.btn-seguir(type="submit") + Seguir
-
           else
             form(method="POST", action=`/seguidores/dejar/${perfil.id_perfil}`)
               if perfil.estado_seguimiento === 'pendiente'

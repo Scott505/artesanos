@@ -16,7 +16,8 @@ export const seguirController = async (req, res) => {
 
         await seguir(seguidoresRepository, id_seguidor, id_seguido);
 
-        res.status(200).json({ message: 'Solicitud de seguimiento enviada.' });
+        res.redirect(`/perfil/todaslaspersonas`);
+
     } catch (error) {
         console.error('Error en seguirController:', error);
         res.status(500).json({ error: 'Error del servidor.' });
@@ -32,7 +33,8 @@ export const dejarDeSeguirController = async (req, res) => {
 
         await dejarDeSeguir(seguidoresRepository, id_seguidor, id_seguido);
 
-        res.status(200).json({ message: 'Seguimiento cancelado o eliminado.' });
+        res.redirect(`/perfil/todaslaspersonas`);
+        
     } catch (error) {
         console.error('Error en dejarDeSeguirController:', error);
         res.status(500).json({ error: 'Error del servidor.' });
