@@ -1,5 +1,9 @@
 import express from 'express';
-import { seguirController, dejarDeSeguirController } from '../../../adapters/controllers/SeguidoresController.js';
+import {
+    seguirController, dejarDeSeguirController,
+    mostrarSolicitudesController, aceptarSolicitudController,
+    rechazarSolicitudController
+} from '../../../adapters/controllers/SeguidoresController.js';
 
 export const seguidoresRoutes = express.Router();
 
@@ -7,9 +11,8 @@ seguidoresRoutes.post('/seguir/:idSeguido', seguirController);
 
 seguidoresRoutes.post('/dejar/:idSeguido', dejarDeSeguirController);
 
-seguidoresRoutes.get('/solicitudes', (req, res) => {
-    res.render('solicitudes', {
-        title: 'Solicitudes de Seguimiento',
-        solicitudes: {}
-    });
-});
+seguidoresRoutes.get('/solicitudes', mostrarSolicitudesController);
+
+seguidoresRoutes.post('/aceptar/:idSeguidor', aceptarSolicitudController);
+
+seguidoresRoutes.post('/rechazar/:idSeguidor', rechazarSolicitudController);
