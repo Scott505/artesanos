@@ -393,3 +393,79 @@ h1 {
   font-weight: 600;
 }
 
+
+/*            Estilos para mostrar otros perfiles              */
+
+.card button {
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.card button:hover {
+  transform: scale(1.05);
+}
+
+.btn-seguir {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-seguir:hover {
+  background-color: #218838;
+}
+
+.btn-pendiente {
+  background-color: orange;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: default;
+  font-weight: 600;
+}
+
+.btn-dejar {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-dejar:hover {
+  background-color: #b02a37;
+}
+
+
+/*            Estilos para solicitudes           */
+
+.btn-aceptar {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-rechazar {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.botones-solicitud {
+  margin-top: 10px;
+}

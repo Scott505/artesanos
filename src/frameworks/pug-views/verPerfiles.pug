@@ -1,0 +1,26 @@
+extends ./layout
+
+block contenido
+  .ancho-maximo-centrado
+    h1 Ver Perfiles
+
+    .grid-container
+      each perfil in perfiles
+        .card
+          if perfil.foto
+            img.card-image(src=`/uploads/${perfil.foto}`, alt="Foto de perfil")
+          else
+            .perfil-sin-foto Sin foto
+
+          .card-title= perfil.nombre
+
+          if perfil.estado_seguimiento === 'no_sigue'
+            form(action=`/seguidores/seguir/${perfil.id_perfil}`, method="POST")
+              button.btn-seguir(type="submit") + Seguir
+
+          else
+            form(method="POST", action=`/seguidores/dejar/${perfil.id_perfil}`)
+              if perfil.estado_seguimiento === 'pendiente'
+                button.btn-pendiente(type="submit") - Cancelar solicitud
+              else if perfil.estado_seguimiento === 'aceptado'
+                button.btn-dejar(type="submit") x Dejar de seguir

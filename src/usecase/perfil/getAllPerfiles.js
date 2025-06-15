@@ -1,6 +1,3 @@
-
-//Funcion para traer todas las personas
-
 export const getAllPerfiles = async (perfilRepository) => {
   const perfiles = await perfilRepository.getAllPerfiles();
 

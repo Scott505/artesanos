@@ -14,6 +14,7 @@ html
 
       .nav-right
         if user
+          a.nav-button(href="/seguidores/solicitudes") Solicitudes
           a.nav-perfil(href=`/perfil/id/${user.id_perfil}`)
             if user.foto
               img.nav-foto(src=`/uploads/${user.foto}`, alt="Mi Perfil")

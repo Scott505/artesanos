@@ -7,6 +7,7 @@ import { UsuarioRepository } from '../repositories/UsuarioRepository.js';
 import { manejadorDeTransacciones } from "../../usecase/manejadorDeTransacciones.js";
 import * as hashService from "../../frameworks/bcrypt/hash.js";
 import { ingresar } from '../../usecase/perfil/ingresar.js';
+import { SeguidoresRepository } from "../repositories/SeguidoresRepository.js";
 
 // Controlador para manejar la solicitud de obtener una persona por ID
 export const getPerfilByIdController = async (req, res) => {
@@ -42,9 +43,37 @@ export const getPerfilByIdController = async (req, res) => {
 
 export const getAllPerfilesController = async (req, res) => {
   const perfilRepository = new PerfilRepository();
+  const seguidoresRepository = new SeguidoresRepository();
+
   try {
-    const perfiles = await getAllPerfiles(perfilRepository);
-    res.json(perfiles);
+    const usuario = req.session.user;
+    const todosLosPerfiles = await getAllPerfiles(perfilRepository);
+    const perfiles = todosLosPerfiles.filter(p => p.id_perfil !== usuario.id_perfil);
+
+    const seguimientos = await seguidoresRepository.getSeguimientosDeUsuario(usuario.id_perfil);
+
+    const mapaSeguimientos = {};
+    seguimientos.forEach(s => {
+      mapaSeguimientos[s.id_seguido] = s.aceptado == 1 ? 'aceptado' : 'pendiente';
+    });
+    //console.log("Mapa de seguimientos:", mapaSeguimientos);
+
+    const perfilesConEstado = perfiles.map(perfil => {
+      const estado = mapaSeguimientos[perfil.id_perfil] || 'no_sigue';
+      return {
+        ...perfil.dataValues,
+        estado_seguimiento: estado,
+      };
+    });
+
+    //console.log("Perfiles con estado de seguimiento:", perfilesConEstado);
+
+    res.render("verPerfiles", {
+      titulo: "Otros Perfiles",
+      mensajeExito: req.session.mensajeExito,
+      perfiles: perfilesConEstado
+    });
+
   } catch (error) {
     console.error('Error en getAllPerfilesController:', error);
     res.status(500).json({ error: 'Error del servidor' });

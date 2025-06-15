@@ -2,6 +2,7 @@ import { perfilRouter } from '../express/routes/perfilRoutes.js';
 import { usuarioRouter } from '../express/routes/usuarioRoutes.js';
 import { publicacionesRouter } from './routes/publicacionesRoutes.js';
 import { mostrarRouter } from './routes/mostrarRoutes.js';
+import { seguidoresRoutes } from './routes/seguidoresRoutes.js';
 import express from 'express';
 import session from 'express-session';
 import path from 'path';
@@ -19,10 +20,16 @@ export const appConfig = (app) => {
 
   // Config. sesion
   app.use(session({
-    secret: 'clave-secreta-bien-larga', // poné una clave segura
-    resave: false,
-    saveUninitialized: false
-  }));
+  secret: 'clave-secreta-bien-larga',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 2, 
+    secure: false,              
+    httpOnly: true              
+  }
+}));
+
 
   app.use((req, res, next) => {
   //  console.log("MIDDLEWARE GLOBAL - Session user:", req.session.user);
@@ -39,7 +46,7 @@ export const appConfig = (app) => {
   app.use('/publicar', estaLogueado, publicacionesRouter);
   app.use('/perfil', estaLogueado, perfilRouter);
   app.use('/usuario', usuarioRouter);
-
+  app.use('/seguidores', seguidoresRoutes);
 };
 
 
