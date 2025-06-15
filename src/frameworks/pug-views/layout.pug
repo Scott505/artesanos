@@ -6,21 +6,23 @@ html
     link(rel="stylesheet", href="/estilos.css")
     block head
   body
-    nav.navbar
-      .nav-left
-        a.nav-button(href="/mostrar/albumnes") Inicio
-        a.nav-button(href="/publicar") Publicar
-        a.nav-button(href="/perfil/todaslaspersonas") Personas
+    if user
+      nav.navbar
+        .nav-left
+          a.nav-button(href=`/mostrar/albumnes/${user.id_perfil}`) Inicio
+          a.nav-button(href="/publicar") Publicar
+          a.nav-button(href="/perfil/todaslaspersonas") Personas
 
-      .nav-right
-        if user
+        .nav-right
           a.nav-button(href="/seguidores/solicitudes") Solicitudes
           a.nav-perfil(href=`/perfil/id/${user.id_perfil}`)
             if user.foto
               img.nav-foto(src=`/uploads/${user.foto}`, alt="Mi Perfil")
             else
               span.nav-perfil-text Mi Perfil
-        else
+    else
+      nav.navbar
+        .nav-right
           a.nav-button(href="/usuario/loguearse") Iniciar sesión
           a.nav-button(href="/usuario/registrarse") Registrarse
 
