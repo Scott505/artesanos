@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   registrarUsuario(socket, user);
 
   socket.on('nueva-solicitud', (data) => {
-    console.log('📥 Notificación recibida:', data);
+    //console.log('📥 Notificación recibida:', data);
     manejarNuevaSolicitud(data);
   });
 });

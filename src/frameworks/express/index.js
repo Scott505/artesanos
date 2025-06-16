@@ -43,20 +43,24 @@ export const appConfig = (app, io) => {
   app.set('views', path.join(__dirname, '../pug-views'));
 
   //Rutas
+  app.get('/', estaLogueado, (req, res) => {
+    const id = req.session.user.id_perfil;
+    return res.redirect(`/mostrar/albumnes/${id}`);
+  });
   app.use('/mostrar', estaLogueado, mostrarRouter);
   app.use('/publicar', estaLogueado, publicacionesRouter);
   app.use('/perfil', estaLogueado, perfilRouter);
   app.use('/usuario', usuarioRouter);
-  app.use('/seguidores', seguidoresRoutes);
+  app.use('/seguidores', estaLogueado, seguidoresRoutes);
 
   //conexión de socket.io
   io.on('connection', (socket) => {
-    console.log('🟢 usuario conectado');
+    //console.log('🟢 usuario conectado');
 
     socket.on('registrar-usuario', (id_perfil) => {
       if (id_perfil) {
         socket.join(`usuario_${id_perfil}`);
-        console.log(`🔔 Usuario ${id_perfil} registrado en su sala`);
+        //console.log(`🔔 Usuario ${id_perfil} registrado en su sala`);
       }
     });
 

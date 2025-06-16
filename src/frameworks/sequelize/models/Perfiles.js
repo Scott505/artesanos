@@ -10,6 +10,7 @@ export default class perfiles extends Model {
       allowNull: false,
       primaryKey: true
     },
+    
     id_usuario: {
       type: DataTypes.INTEGER,
       allowNull: true,
