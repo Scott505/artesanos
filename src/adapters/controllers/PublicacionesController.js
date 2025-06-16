@@ -70,8 +70,10 @@ export const mostrarPublicacionesController = async (req, res) => {
       return res.status(404).send('Publicación no encontrada');
     }
 
+    console.log('Publicación obtenida:', publicacion);
+
     res.render('verPublicacion', {
-      titulo: `Publicación #${id_publicacion}`,
+      titulo: `Publicación de ${publicacion.nombre_perfil}`,
       publicaciones: [publicacion]
     });
 
