@@ -28,3 +28,10 @@ html
 
     block contenido
     block foot
+    //-WebSocket
+    script(src="/socket.io/socket.io.js")
+    if user
+      script.
+        window.usuarioAutenticado = !{JSON.stringify(user)};
+    script(src="/io.js")
+

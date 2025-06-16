@@ -9,9 +9,10 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { estaLogueado } from '../../middlewares/estaLogueado.js';
 
-export const appConfig = (app) => {
+export const appConfig = (app, io) => {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
+  app.set('io', io);
 
   // Configuración de la aplicación Express
   app.use(express.static('public'));
@@ -20,19 +21,19 @@ export const appConfig = (app) => {
 
   // Config. sesion
   app.use(session({
-  secret: 'clave-secreta-bien-larga',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    maxAge: 1000 * 60 * 60 * 2, 
-    secure: false,              
-    httpOnly: true              
-  }
-}));
+    secret: 'clave-secreta-bien-larga',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 2,
+      secure: false,
+      httpOnly: true
+    }
+  }));
 
 
   app.use((req, res, next) => {
-  //  console.log("MIDDLEWARE GLOBAL - Session user:", req.session.user);
+    //  console.log("MIDDLEWARE GLOBAL - Session user:", req.session.user);
     res.locals.user = req.session.user || null;
     next();
   });
@@ -47,6 +48,20 @@ export const appConfig = (app) => {
   app.use('/perfil', estaLogueado, perfilRouter);
   app.use('/usuario', usuarioRouter);
   app.use('/seguidores', seguidoresRoutes);
+
+  //conexión de socket.io
+  io.on('connection', (socket) => {
+    console.log('🟢 usuario conectado');
+
+    socket.on('registrar-usuario', (id_perfil) => {
+      if (id_perfil) {
+        socket.join(`usuario_${id_perfil}`);
+        console.log(`🔔 Usuario ${id_perfil} registrado en su sala`);
+      }
+    });
+
+    // Aquí puedes agregar más eventos de socket.io según sea necesario
+  });
 };
 
 
