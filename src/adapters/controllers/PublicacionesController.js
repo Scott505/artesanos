@@ -42,16 +42,7 @@ export const crearPublicacionController = async (req, res) => {
 
         //res.redirect('/publicar');
 
-        res.status(201).json({
-            mensaje: 'Publicación creada exitosamente',
-            datos: {
-                id_perfil,
-                descripcion,
-                imagen,
-                id_album,
-                titulo_nuevo_album
-            }
-        });
+        res.redirect('/mostrar/albumnes/' + id_perfil);
 
     } catch (error) {
         console.error('Error al crear publicación:', error);
