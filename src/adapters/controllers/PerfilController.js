@@ -8,6 +8,8 @@ import { manejadorDeTransacciones } from "../../usecase/manejadorDeTransacciones
 import * as hashService from "../../frameworks/bcrypt/hash.js";
 import { ingresar } from '../../usecase/perfil/ingresar.js';
 import { SeguidoresRepository } from "../repositories/SeguidoresRepository.js";
+import { cerrarSesion } from '../../usecase/perfil/cerrarSesion.js';
+
 
 // Controlador para manejar la solicitud de obtener una persona por ID
 export const getPerfilByIdController = async (req, res) => {
@@ -171,5 +173,15 @@ export const ingresarUsuarioController = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(401).render('logueo', { error: error.message });;
+  }
+};
+
+export const cerrarSesionController = async (req, res) => {
+  try {
+    await cerrarSesion(req);
+    res.redirect('/usuario/loguearse');
+  } catch (error) {
+    console.error('Error al cerrar sesión:', error);
+    res.status(500).send('Error al cerrar sesión');
   }
 };

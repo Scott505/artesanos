@@ -406,6 +406,16 @@ h1 {
   background-color: #0056b3;
 }
 
+.btn-cerrar-sesion {
+  color: white;
+  background-color: #dc3545;
+  padding: 8px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+
+
 
 
 /*            Estilos para mostrar otros perfiles              */

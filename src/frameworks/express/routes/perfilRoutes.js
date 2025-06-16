@@ -8,8 +8,6 @@ const __dirname = path.dirname(__filename);
 
 export const perfilRouter = express.Router();
 
-// Ruta principal de perfil
-
 // Ruta para obtener una persona por ID utilizando el controlador
 
 perfilRouter.get('/todaslaspersonas', getAllPerfilesController);

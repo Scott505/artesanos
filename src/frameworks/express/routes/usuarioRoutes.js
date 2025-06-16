@@ -1,5 +1,5 @@
 import express from 'express';
-import { crearUsuarioController, ingresarUsuarioController } from '../../../adapters/controllers/PerfilController.js';
+import { crearUsuarioController, ingresarUsuarioController, cerrarSesionController } from '../../../adapters/controllers/PerfilController.js';
 
 import { upload } from '../../../middlewares/upload.js';
 
@@ -17,3 +17,5 @@ usuarioRouter.get('/loguearse', (req, res) => {
 usuarioRouter.post('/ingresar', ingresarUsuarioController);
 
 usuarioRouter.post('/registrar', upload.single('foto'), crearUsuarioController);
+
+usuarioRouter.post('/cerrar-sesion', cerrarSesionController);

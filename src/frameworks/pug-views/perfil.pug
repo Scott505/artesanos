@@ -1,14 +1,12 @@
 extends layout
 
 block contenido
-  
-  block contenido
+
   if mensajeExito
     .alert(style="background: #d4edda; color: #155724; padding: 10px; border: 1px solid #c3e6cb; border-radius: 4px; margin-bottom: 15px")
       strong ¡Éxito! 
       | #{mensajeExito}
 
-  
   .perfil-container
     .perfil-izquierda
       if perfil.foto
@@ -16,8 +14,14 @@ block contenido
       else
         div.perfil-sin-foto No hay foto
       h2.perfil-nombre= perfil.nombre
-      if user && user.id_perfil !== perfil.id_perfil
-        a.btn-ver-album(href=`/mostrar/albumnes/${perfil.id_perfil}?nombre=${encodeURIComponent(perfil.nombre)}`) Ver álbumes de #{perfil.nombre}
+
+      if user
+        if user.id_perfil !== perfil.id_perfil
+          a.btn-ver-album(href=`/mostrar/albumnes/${perfil.id_perfil}?nombre=${encodeURIComponent(perfil.nombre)}`) Ver álbumes de #{perfil.nombre}
+        else
+          form(action="/usuario/cerrar-sesion", method="POST")
+            button.btn-cerrar-sesion(type="submit") Cerrar sesión
+
     .perfil-derecha
       p
         strong Teléfono: 
