@@ -20,4 +20,4 @@ Una red social pensada para que artesanos puedan compartir sus trabajos, seguir 
 - Tiempo real     ->   Socket.IO
 - Arquitectura    ->   Clean architecture
 
-NOTA: La base de datos se ecuentra subida vacia en la raiz como "artesanos.sql"
+NOTA: La base de datos se encuentra subida vacia en la raiz como "artesanos.sql"
