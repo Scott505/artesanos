@@ -13,9 +13,11 @@ Una red social pensada para que artesanos puedan compartir sus trabajos, seguir 
 
 ## 🛠️ Tecnologías utilizadas
 
-Back-end        ->   Node.js, Express.js
-Base de datos   ->   MySQL, Sequelize (ORM)
-Autenticación   ->   Express-session
-Front-end       ->   Pug (template engine), CSS
-Tiempo real     ->   Socket.IO
-Arquitectura    ->   Clean architecture
+- Back-end        ->   Node.js, Express.js
+- Base de datos   ->   MySQL, Sequelize (ORM)
+- Autenticación   ->   Express-session
+- Front-end       ->   Pug (template engine), CSS
+- Tiempo real     ->   Socket.IO
+- Arquitectura    ->   Clean architecture
+
+NOTA: La base de datos se ecuentra subida vacia en la raiz como "artesanos.sql"
